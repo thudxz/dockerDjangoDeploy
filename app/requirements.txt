@@ -1,0 +1,5 @@
+celery==4.3.0
+Django==2.2.7
+redis==3.3.11
+uwsgi
+rpy2==2.9.5

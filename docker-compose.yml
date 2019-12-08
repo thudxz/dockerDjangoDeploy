@@ -1,0 +1,66 @@
+version: '3'
+
+services:
+  testapp:
+    restart: always
+    build: ./app
+    container_name: testapp
+    command: ["uwsgi", "--ini", "uwsgi.ini"]
+    expose:
+      - "8000"
+    depends_on:
+      - redis
+    hostname: testapp
+    image: testapp-image
+    volumes:
+      - app_shared:/app_sock # app_shared volume is used to store sock file that should be accessible from nginx server
+      - /var/log/dockeruwsgi:/var/log/uwsgi
+
+  redis:
+    restart: always
+    build: ./redis
+    command: ["redis-server", "--bind", "redis", "--port", "6379"]
+    ports:
+      - "6379:6379"
+    expose:
+      - "6379"
+
+  nginx:
+    container_name: nginx-container
+    build: ./nginx
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - testapp
+    volumes: 
+      - app_shared:/nginx_sock
+      - /var/log/dockernginx:/var/log/nginx
+
+  celery_worker:
+    command: sh -c "celery -A app worker -l info"
+    container_name: celery_worker
+    depends_on: 
+      - testapp
+      - redis
+    hostname: celery_worker
+    image: testapp-image # celery_worker and celey_beat are executed in testapp-image
+    restart: on-failure
+  
+  celery_beat:
+    command: sh -c "celery -A app beat -l info"
+    container_name: celery_beat
+    depends_on: 
+      - testapp
+      - redis
+    hostname: celery_beat
+    image: testapp-image
+    restart: on-failure
+
+volumes:
+  app_shared:
+  
+
+
+  
+    

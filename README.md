@@ -9,4 +9,10 @@ This is the first time I use docker to deploy a project. So I met some problems 
 ### redis BROKER_URL in django settings.py
 In docker, every container has its own localhost. For redis settins in django settings.py, we should use "redis://redis:6379" other than "redis:localhost:6379" for BROKER_URL and CELERY_RESULT_BACKEND.
 ### Volume defined in docker-compose.yml overwrites the directory made in dockerfile if they share the same name
-The directory made in dockerfile only accessible by the container, while the volume defined in docker-compose.yml are accessible both by the container and the host. 
+The directory made in dockerfile only accessible by the container, while the volume defined in docker-compose.yml are accessible both by the container and the host.
+## Resources
+This test was developed following many resources. If needed, just click
+### 
+* [docker-django-nginx-uwsgi-postgres](https://github.com/twtrubiks/docker-django-nginx-uwsgi-postgres-tutorial)
+* [django-celery-docker-example](https://github.com/chrisk314/django-celery-docker-example)
+* [django-development-with-docker-conpose-and-docker-mathine](https://realpython.com/django-development-with-docker-compose-and-machine/)
