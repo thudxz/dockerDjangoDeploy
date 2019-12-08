@@ -1,5 +1,13 @@
 # dockerDjangoDeploy
 This is a test to deploy a Django application using Docker and docker-compose. Nginx is used as a reverse proxy serve. Nginx and django are connected by uwsgi. In the django project, I use celery and redis for asynchronous tasks. 
+## Install and Run
+To run this application, you should install docker and then make a virtual environment for installing docker-compose.  
+```
+git clone https://github.com/thudxz/dockerDjangoDeploy.git
+cd ./dockerDjangoDeploy
+docker-compose up -d
+```
+Open a web browser, use "http://localhost/static/test.txt" to test nginx to server static files, "http://localhost/report/test" to test uwsgi and django, "http://localhost/report/" to test uwsgi, django, celery and redis.
 ## Why we develop a pythonr image
 In django, I need to use rpy2 package, so I first build a image that contains python and R environment. 
 ## Why we choose pyton-buster other than python-alpine
