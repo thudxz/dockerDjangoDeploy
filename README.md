@@ -1,5 +1,5 @@
 # dockerDjangoDeploy
-This is a test to deploy a Django application using Docker. Nginx is used as a reverse proxy serve. Nginx and django are connected by uwsgi. In the django project, I use celery redis and redis for asynchronous tasks. 
+This is a test to deploy a Django application using Docker and docker-compose. Nginx is used as a reverse proxy serve. Nginx and django are connected by uwsgi. In the django project, I use celery and redis for asynchronous tasks. 
 ## Why we develop a pythonr image
 In django, I need to use rpy2 package, so I first build a image that contains python and R environment. 
 ## Why we choose pyton-buster other than python-alpine
@@ -12,7 +12,8 @@ In docker, every container has its own localhost. For redis settins in django se
 The directory made in dockerfile only accessible by the container, while the volume defined in docker-compose.yml are accessible both by the container and the host.
 ## Resources
 This test was developed following many resources. If needed, just click
-### 
+###
+* [asynchronous tasks with django and celery](https://realpython.com/asynchronous-tasks-with-django-and-celery/) 
 * [docker-django-nginx-uwsgi-postgres](https://github.com/twtrubiks/docker-django-nginx-uwsgi-postgres-tutorial)
 * [django-celery-docker-example](https://github.com/chrisk314/django-celery-docker-example)
 * [django-development-with-docker-conpose-and-docker-mathine](https://realpython.com/django-development-with-docker-compose-and-machine/)
